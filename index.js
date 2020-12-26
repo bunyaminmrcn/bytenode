@@ -70,9 +70,9 @@ var readSourceHash = function (bytecodeBuffer) {
 
   if (process.version.startsWith('v8.8') || process.version.startsWith('v8.9')) {
     // Node is v8.8.x or v8.9.x
-    return bytecodeBuffer.slice(12, 16).reduce((sum, number, power) => sum += number * Math.pow(256, power), 0);
+    return bytecodeBuffer.slice(12, 16).reduce(function(sum, number, power) { return sum += number * Math.pow(256, power)}, 0)
   } else {
-    return bytecodeBuffer.slice(8, 12).reduce((sum, number, power) => sum += number * Math.pow(256, power), 0);
+    return bytecodeBuffer.slice(8, 12).reduce(function(sum, number, power){ return sum += number * Math.pow(256, power) }, 0)
   }
 };
 

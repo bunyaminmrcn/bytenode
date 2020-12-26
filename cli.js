@@ -29,8 +29,8 @@ var program = {
   dirname: __dirname,
   filename: __filename,
   nodeBin: process.argv[0],
-  flags: args.filter(arg => arg[0] === '-'),
-  files: args.filter(arg => arg[0] !== '-' && arg[1] !== '-'),
+  flags: args.filter(function(arg) { return arg[0] === '-'}),
+  files: args.filter(function(arg) { return arg[0] !== '-' && arg[1] !== '-'}),
 };
 
 if (program.flags.includes('--compile')) {
@@ -59,14 +59,14 @@ if (program.flags.includes('--compile')) {
 
     process.stdin.setEncoding('utf-8');
 
-    process.stdin.on('readable', () => {
+    process.stdin.on('readable', function() {
       var data = process.stdin.read();
       if (data !== null) {
         script += data;
       }
     });
 
-    process.stdin.on('end', () => {
+    process.stdin.on('end', function() {
 
       try {
         process.stdout.write(bytenode.compileCode(wrap(script)));
